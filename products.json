@@ -1,0 +1,37 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "iPhone 15 Pro Max 256GB",
+        "price": "29,690,000 vnd",
+        "brand": "Apple",
+        "status": "In stocks",
+        "image": "https://example.com/iphone-15-pro-max.jpg"  
+      },
+      {
+        "id": 2,
+        "name": "MacBook Air 13 inch M1 2020",
+        "price": "18,590,000 vnd",
+        "brand": "Apple",
+        "status": "In stocks",
+        "image": "https://example.com/macbook-air-13-m1.jpg"  
+      },
+      {
+        "id": 3,
+        "name": "Samsung Galaxy Tab S6 Lite",
+        "price": "6,990,000 vnd",
+        "brand": "Samsung",
+        "status": "Out of stock",
+        "image": "https://example.com/samsung-tab-s6-lite.jpg"  
+      },
+      {
+        "id": 4,
+        "name": "Máy giặt lồng ngang Panasonic NA",
+        "price": "13,290,000 vnd",
+        "brand": "Panasonic",
+        "status": "In stocks",
+        "image": "https://example.com/panasonic-washing-machine.jpg"  
+      }
+    ]
+  }
+  
