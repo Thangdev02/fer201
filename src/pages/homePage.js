@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import CardCountry from "../components/cardCountry";
 import axios from "axios";
 import { Box } from "@mui/material";
+import apiEndpoints from "../services/apiAuth";
+import CardOrchid from "../components/orchidCard";
 
-const HomeCountryPage = () => {
-  const [countries, setCountries] = useState([]);
+const HomePage = () => {
+
+  const [orchid, setOrchid] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://6700b6964da5bd2375549d94.mockapi.io/Countries")
+      .get(apiEndpoints.orchid)
       .then((response) => {
-        setCountries(response.data);
+        setOrchid(response.data);
         console.log(response.data);
       });
   }, []);
@@ -25,12 +27,12 @@ const HomeCountryPage = () => {
           alignItems: "stretch", // Đảm bảo các thẻ có chiều cao bằng nhau
         }}
       >
-        {countries.map((country) => (
-          <CardCountry key={country.id} country={country} />
+        {orchid.map((orchid) => (
+          <CardOrchid key={orchid.id} orchid={orchid} />
         ))}
       </Box>
     </div>
   );
 };
 
-export default HomeCountryPage;
+export default HomePage;

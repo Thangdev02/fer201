@@ -35,6 +35,12 @@ const ManagerSidebar = () => {
             <SupervisorAccountIcon /> Manage Account
           </Link>
         </li>
+        <li style={listItemStyle}>
+          <Link to="manager-orchid" style={linkStyle}>
+            <SupervisorAccountIcon /> Manage Orchid
+          </Link>
+          
+        </li>
       </ul>
     </div>
   );

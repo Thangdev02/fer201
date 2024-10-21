@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -10,6 +10,7 @@ import {
   Container,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const ManagerProfilePage = () => {
   // State to store the uploaded images
@@ -19,6 +20,33 @@ const ManagerProfilePage = () => {
   const [profileImage, setProfileImage] = useState(
     "https://img.freepik.com/free-vector/elegant-businessman-office-scene_24877-57719.jpg?t=st=1728840469~exp=1728844069~hmac=84913255acd309d8247d0267f01afc6ac8b4f1f826c30cc4b4f1d7cfce135819&w=740"
   );
+
+  const [displayName, setDisplayName] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User logged in:", user); // Log toàn bộ thông tin người dùng
+        console.log("Display Name:", user.displayName); // Log tên hiển thị
+        console.log("Photo URL:", user.photoURL); // Log URL ảnh đại diện
+
+        setDisplayName(user.displayName);
+        
+        if (user.photoURL) {
+          setAvatar(user.photoURL); // Cập nhật avatar từ photoURL của người dùng
+        } else {
+          console.log("Photo URL is not available.");
+        }
+      } else {
+        console.log("No user is logged in.");
+      }
+    });
+
+    // Cleanup listener khi component bị huỷ
+    return () => unsubscribe();
+  }, []);
 
   // Handle background image upload
   const handleBackgroundUpload = (e) => {
@@ -73,17 +101,19 @@ const ManagerProfilePage = () => {
         </Box>
 
         <Box sx={{ textAlign: "center", padding: 3 }}>
-          <Avatar
-            src={profileImage}
-            alt="Profile Image"
-            sx={{
-              width: 150,
-              height: 150,
-              marginTop: "-75px",
-              border: "4px solid white",
-              display: "inline-block",
-            }}
-          />
+        <Avatar
+  src={avatar || "https://via.placeholder.com/150"} // Thử thêm ảnh placeholder nếu `avatar` trống
+  alt="Profile Image"
+  sx={{
+    width: 150,
+    height: 150,
+    marginTop: "-75px",
+    border: "4px solid white",
+    display: "inline-block",
+    backgroundColor: "gray", // Đặt màu nền tạm thời để dễ kiểm tra
+  }}
+/>
+
           <IconButton
             color="primary"
             sx={{
@@ -108,7 +138,7 @@ const ManagerProfilePage = () => {
             component="h2"
             sx={{ marginTop: 1, fontWeight: "bold" }}
           >
-            Danish Helium
+            {displayName || "Danish Helium"}
           </Typography>
           <Typography variant="body1" color="textSecondary">
             UI/UX Designer
